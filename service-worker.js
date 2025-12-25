@@ -3,7 +3,7 @@ const urlsToCache = [
   '/',
   '/index.html',
   '/manifest.json',
-  '/images/logo .png',
+  '/images/logo.png',
   'images/logo.jpg',
   '/images/background.jpg',
   '/pdfs/BMS021 phys 1.pdf',
