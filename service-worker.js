@@ -6,12 +6,12 @@ const urlsToCache = [
   '/images/logo.png',
   'images/logo.jpg',
   '/images/background.jpg',
-  '/pdfs/BMS021 phys 1.pdf',
-  '/pdfs/Engineering Chemistry BMS022.pdf',
-  '/pdfs/Engineering drawing MEE121.pdf',
-  '/pdfs/Mathematics1-BMS011.pdf',
-  '/pdfs/mechanics 1 BMS012.pdf',
-  '/pdfs/Engineering English.pdf',
+  '/pdfs/phys.pdf',
+  '/pdfs/Chemistry.pdf',
+  '/pdfs/drawing.pdf',
+  '/pdfs/Mathematics.pdf',
+  '/pdfs/mechanics.pdf',
+  '/pdfs/English.pdf',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
 ];
 
