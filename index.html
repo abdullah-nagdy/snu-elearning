@@ -8,15 +8,10 @@
 <!-- Font Awesome for icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<!-- Favicon (ضع ملف favicon.png في نفس المجلد أو غيّر المسار) -->
-<link rel="icon" type="image/png" href="images/logo .png">
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="images/logo.png">
 
 <style>
-/* -------------------------
-   CSS VARIABLES (THEMES)
-   ------------------------- */
-
-/* Default (Light) variables */
 :root{
   --bg-color: #f5f5f5;
   --page-bg: #ffffff;
@@ -26,7 +21,7 @@
   --sidenav-bg: #f5f5f5;
   --link-bg-hover: #cce0ff;
   --link-bg-active: #99c2ff;
-  --accent: #1877f2; /* accent color (blue) */
+  --accent: #1877f2;
   --btn-bg: #99c2ff;
   --btn-bg-hover: #66a3ff;
   --footer-bg: #d0d0d0;
@@ -36,9 +31,7 @@
   --transition-fast: 180ms;
   --transition: 300ms;
 }
-
-/* Dark theme - inspired by Facebook dark palette */
-.theme-dark {
+.theme-dark { 
   --bg-color: #121212;
   --page-bg: #ffffff;
   --text-color: #b3b7c0;
@@ -47,7 +40,7 @@
   --sidenav-bg: #1e1f21;
   --link-bg-hover: rgba(255,255,255,0.04);
   --link-bg-active: rgba(24,119,242,0.14);
-  --accent: #1877f2; /* blue accent still */
+  --accent: #1877f2;
   --btn-bg: rgba(24,119,242,0.18);
   --btn-bg-hover: rgba(24,119,242,0.26);
   --footer-bg: #141414;
@@ -55,8 +48,6 @@
   --border-color: rgba(255,255,255,0.04);
   --glass: rgba(255,255,255,0.03);
 }
-
-/* Colorful theme - elegant palette from material-ish blue-teal-indigo */
 .theme-colorful {
   --bg-color: #a0c3e1;
   --page-bg: #c97676;
@@ -75,9 +66,6 @@
   --glass: rgba(255,255,255,0.85);
 }
 
-/* -------------------------
-   GLOBAL STYLES
-   ------------------------- */
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
 body{
@@ -87,16 +75,11 @@ body{
   transition: background var(--transition), color var(--transition);
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
-  padding-bottom: 70px; /* reserve footer space */
+  padding-bottom: 70px;
 }
-
-/* Links and small text */
 a{color:inherit;text-decoration:none}
 .small{font-size:13px;color:var(--muted-text)}
 
-/* -------------------------
-   NAVBAR
-   ------------------------- */
 .navbar{
   position:fixed;top:0;left:0;right:0;height:70px;
   display:flex;align-items:center;justify-content:space-between;
@@ -107,17 +90,11 @@ a{color:inherit;text-decoration:none}
   z-index:1200;
   transition: background var(--transition), box-shadow var(--transition);
 }
-
-/* left cluster */
 .navbar-left{display:flex;align-items:center;gap:14px}
 .hamburger{font-size:26px;cursor:pointer;user-select:none;padding:6px;border-radius:6px}
 .hamburger:focus{outline:2px solid rgba(0,0,0,0.08)}
 .logo img{width:42px;height:42px;border-radius:8px;object-fit:cover}
-
-/* center */
 .navbar-center{font-weight:700;font-size:15px;color:var(--text-color);text-align:center;flex:1;user-select:none}
-
-/* right cluster */
 .navbar-right{display:flex;align-items:center;gap:12px}
 #themeBtn{
   background:transparent;border:1px solid transparent;padding:6px 10px;border-radius:8px;cursor:pointer;
@@ -126,8 +103,6 @@ a{color:inherit;text-decoration:none}
 }
 #themeBtn:focus{outline:2px solid rgba(0,0,0,0.08)}
 .theme-swatch{width:18px;height:12px;border-radius:4px;box-shadow:0 1px 2px rgba(0,0,0,0.08)}
-
-/* theme dropdown */
 .theme-menu{
   position:absolute;right:18px;top:70px;
   background: var(--page-bg);
@@ -140,8 +115,6 @@ a{color:inherit;text-decoration:none}
   transition:opacity var(--transition);
 }
 .theme-menu.show{display:block}
-
-/* option row */
 .theme-option{
   display:flex;align-items:center;gap:10px;padding:8px;border-radius:8px;cursor:pointer;
   transition:background var(--transition);
@@ -150,13 +123,17 @@ a{color:inherit;text-decoration:none}
 .theme-option .label{font-weight:600}
 .theme-option .desc{font-size:12px;color:var(--muted-text)}
 
-/* -------------------------
-   SIDENAV
-   ------------------------- */
 .sidenav{
-  position:fixed;top:70px;left:0;height:calc(100% - 70px);width:0;
-  overflow:hidden;transition:width 340ms cubic-bezier(.2,.8,.2,1);
-  background: var(--sidenav-bg);padding-top:20px;z-index:1100;
+  position:fixed;
+  top:70px;
+  left:0;
+  height:calc(100% - 70px);
+  width:0;
+  overflow-y:auto;
+  transition:width 0.3s;
+  background: var(--sidenav-bg);
+  padding-top:20px;
+  z-index:1100;
   border-right:1px solid var(--border-color);
 }
 .sidenav-link{
@@ -166,54 +143,69 @@ a{color:inherit;text-decoration:none}
 .sidenav-link i{min-width:18px;text-align:center}
 .sidenav-link:hover{background:var(--link-bg-hover)}
 .sidenav-link.active{background:var(--link-bg-active)}
-.contact-dropdown{overflow:hidden;max-height:0;transition:max-height var(--transition)}
+.contact-dropdown{
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+.contact-dropdown a{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 14px;
+  border-radius:8px;
+  background:transparent;
+  color: var(--text-color);
+  transition:background var(--transition);
+}
+.contact-dropdown a:hover{
+  background: var(--link-bg-hover);
+}
 
-/* -------------------------
-   OVERLAY
-   ------------------------- */
 #overlay{position:fixed;top:70px;left:0;width:100%;height:calc(100% - 70px);
   background:var(--overlay);display:none;z-index:1090;transition:opacity var(--transition)}
 
-/* -------------------------
-   CONTENT / PDF
-   ------------------------- */
-.content{margin-top:80px;padding:20px;display:flex;justify-content:center}
+.content{margin-top:80px;padding:20px;display:flex;flex-direction:column;align-items:center}
 .pdf-container{width:90%;height:80vh;position:relative;background:var(--page-bg);border-radius:10px;overflow:hidden;box-shadow:0 6px 20px rgba(2,8,23,0.06)}
 .pdf-container iframe{width:100%;height:100%;border:0;display:block}
-
-/* fullscreen button in navbar (shows only when PDF loaded) */
-#fullscreenBtnNav{
+#openPdfBtn{
   display:none;
-  padding:8px 12px;border-radius:8px;border:0;cursor:pointer;font-weight:700;
-  background:var(--btn-bg);color:var(--text-color);
-  transition:background var(--transition);
+  margin:20px auto 0;
+  padding:14px 22px;
+  background:var(--accent);
+  color:#fff;
+  border-radius:10px;
+  font-weight:700;
+  text-align:center;
+  text-decoration:none;
 }
-#fullscreenBtnNav:hover{background:var(--btn-bg-hover)}
 
-/* small fullscreen btn inside container (hidden since nav btn used) */
-#fsInner{display:none}
-
-/* -------------------------
-   HOME BACKGROUND
-   ------------------------- */
 .home-background{width:100%;height:calc(100vh - 70px);display:flex;justify-content:center;align-items:center;
   background:url('background.jpg') center/cover no-repeat;color:var(--page-bg);text-shadow:0 4px 18px rgba(0,0,0,0.25);
   font-size:26px;font-weight:700}
 
-/* -------------------------
-   FOOTER
-   ------------------------- */
-.footer{position:fixed;bottom:0;left:0;right:0;height:60px;background:var(--footer-bg);display:flex;align-items:center;justify-content:center;gap:16px;color:var(--page-bg);z-index:1200}
+.footer{position:relative;bottom:0;left:0;right:0;height:auto;background:var(--footer-bg);display:flex;align-items:center;justify-content:center;color:var(--page-bg);padding:12px 0;flex-wrap:wrap;position: fixed;}
 .footer a{color:inherit}
 
-/* -------------------------
-   TRANSITIONS (apply to main areas)
-   ------------------------- */
+#fullscreenBtnNav{
+  display:none;
+  padding:8px 12px;
+  border-radius:8px;
+  border:0;
+  cursor:pointer;
+  font-weight:700;
+  background:var(--btn-bg);
+  color:var(--page-bg);
+  transition:background var(--transition);
+}
+#fullscreenBtnNav:hover{background:var(--btn-bg-hover)}
+
 .navbar, .sidenav, .footer, .pdf-container, .home-background, body { transition: background var(--transition), color var(--transition), border-color var(--transition) }
 
-/* -------------------------
-   RESPONSIVE
-   ------------------------- */
 @media(max-width:900px){
   .navbar-center{display:none}
   .pdf-container{width:95%;height:70vh}
@@ -224,10 +216,8 @@ a{color:inherit;text-decoration:none}
 </head>
 <body>
 
-<!-- OVERLAY -->
 <div id="overlay" onclick="closeNav()"></div>
 
-<!-- SIDE NAV -->
 <div id="mySidenav" class="sidenav" aria-hidden="true">
   <div class="sidenav-link" onclick="goHome(this)"><i class="fa fa-house"></i><span>Home</span></div>
   <div class="sidenav-link" onclick="showPDF('pdfs/BMS021 phys 1.pdf', this)"><i class="fa fa-book"></i><span>Physics 1</span></div>
@@ -237,7 +227,6 @@ a{color:inherit;text-decoration:none}
   <div class="sidenav-link" onclick="showPDF('pdfs/mechanics 1 BMS012.pdf', this)"><i class="fa fa-book"></i><span>Mechanics 1</span></div>
   <div class="sidenav-link" onclick="showPDF('pdfs/Engineering English.pdf', this)"><i class="fa fa-book"></i><span>Engineering English</span></div>
 
-  <!-- Contact -->
   <div class="sidenav-link" onclick="toggleContactDropdown(this)"><i class="fa fa-phone"></i><span>Contact Us</span></div>
   <div class="contact-dropdown" id="contactDropdown">
     <a href="tel:+201021816035"><i class="fa fa-phone"></i> Call</a>
@@ -245,24 +234,19 @@ a{color:inherit;text-decoration:none}
   </div>
 </div>
 
-<!-- NAVBAR -->
 <header class="navbar" role="banner">
   <div class="navbar-left">
     <button class="hamburger" aria-label="Toggle menu" onclick="toggleNav()" aria-expanded="false">&#9776;</button>
-    <div class="logo"><img src="images/logo.jpg" alt="Logo (add your link)"></div>
+    <div class="logo"><img src="images/logo.jpg" alt="Logo"></div>
   </div>
-
   <div class="navbar-center" aria-hidden="false">Suez National University E-Learning</div>
-
   <div class="navbar-right">
-    <!-- Theme button -->
     <button id="themeBtn" aria-haspopup="true" aria-expanded="false" onclick="toggleThemeMenu()" title="Theme">
       <span class="theme-swatch" id="currentSwatch" style="background:var(--accent)"></span>
       <span class="small">Theme</span>
       <i class="fa fa-caret-down" style="opacity:.8"></i>
     </button>
 
-    <!-- theme dropdown -->
     <div id="themeMenu" class="theme-menu" role="menu" aria-label="Theme menu">
       <div class="theme-option" tabindex="0" onclick="setTheme('light')" onkeydown="if(event.key==='Enter')setTheme('light')">
         <div class="theme-swatch" style="background:#ffffff;border:1px solid #eee"></div>
@@ -271,7 +255,6 @@ a{color:inherit;text-decoration:none}
           <div class="desc">Default, bright and clean</div>
         </div>
       </div>
-
       <div class="theme-option" tabindex="0" onclick="setTheme('dark')" onkeydown="if(event.key==='Enter')setTheme('dark')">
         <div class="theme-swatch" style="background:#242526;border:1px solid rgba(255,255,255,0.06)"></div>
         <div>
@@ -279,7 +262,6 @@ a{color:inherit;text-decoration:none}
           <div class="desc">Comfortable night view (Facebook-like)</div>
         </div>
       </div>
-
       <div class="theme-option" tabindex="0" onclick="setTheme('colorful')" onkeydown="if(event.key==='Enter')setTheme('colorful')">
         <div class="theme-swatch" style="background:linear-gradient(90deg,#87c6ff,#7bd3d6)"></div>
         <div>
@@ -289,27 +271,24 @@ a{color:inherit;text-decoration:none}
       </div>
     </div>
 
-    <!-- Fullscreen button in navbar (appears only when PDF loaded) -->
     <button id="fullscreenBtnNav" title="Fullscreen PDF" onclick="toggleFullscreen()">Fullscreen</button>
   </div>
 </header>
 
-<!-- MAIN CONTENT -->
 <main>
   <section class="content" id="mainContent">
-    <!-- Home background (shown by default) -->
     <div id="homeContent" class="home-background">
       Welcome to the E-Learning Platform
     </div>
 
-    <!-- PDF container (hidden on home) -->
     <div id="pdfContent" class="pdf-container" style="display:none;">
       <iframe id="pdfViewer" src="" title="PDF Viewer"></iframe>
     </div>
+
+    <a id="openPdfBtn" href="#" target="_blank">Open PDF</a>
   </section>
 </main>
 
-<!-- FOOTER -->
 <footer class="footer" role="contentinfo">
   <div>Designed by Abdullah Mohamed. All rights reserved.</div>
   <div>
@@ -318,168 +297,77 @@ a{color:inherit;text-decoration:none}
   </div>
 </footer>
 
-<!-- SCRIPTS -->
 <script>
-/* -------------------------
-   ELEMENTS
-   ------------------------- */
 const sidenav = document.getElementById('mySidenav');
 const overlay = document.getElementById('overlay');
 const pdfViewer = document.getElementById('pdfViewer');
 const pdfContent = document.getElementById('pdfContent');
 const homeContent = document.getElementById('homeContent');
+const openPdfBtn = document.getElementById('openPdfBtn');
 const fullscreenBtnNav = document.getElementById('fullscreenBtnNav');
-const themeBtn = document.getElementById('themeBtn');
-const themeMenu = document.getElementById('themeMenu');
-const currentSwatch = document.getElementById('currentSwatch');
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
-/* -------------------------
-   SIDENAV FUNCTIONS
-   ------------------------- */
 function toggleNav(){
-  const opened = sidenav.style.width === '250px';
-  if(opened){
-    sidenav.style.width = '0';
-    overlay.style.display = 'none';
-    sidenav.setAttribute('aria-hidden','true');
-    document.querySelector('.hamburger').setAttribute('aria-expanded','false');
-  } else {
-    sidenav.style.width = '250px';
-    overlay.style.display = 'block';
-    sidenav.setAttribute('aria-hidden','false');
-    document.querySelector('.hamburger').setAttribute('aria-expanded','true');
-  }
+  const opened = sidenav.style.width==='250px';
+  if(opened){sidenav.style.width='0';overlay.style.display='none'}
+  else{sidenav.style.width='250px';overlay.style.display='block'}
 }
-function closeNav(){
-  sidenav.style.width = '0';
-  overlay.style.display = 'none';
-  sidenav.setAttribute('aria-hidden','true');
-  document.querySelector('.hamburger').setAttribute('aria-expanded','false');
-}
+function closeNav(){sidenav.style.width='0';overlay.style.display='none'}
 
-/* -------------------------
-   PDF / HOME FUNCTIONS
-   ------------------------- */
 function showPDF(pdfLink, selectedDiv){
-  // mark active link
-  document.querySelectorAll('.sidenav-link').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.sidenav-link').forEach(n=>n.classList.remove('active'));
   if(selectedDiv) selectedDiv.classList.add('active');
 
-  // show pdf content
-  pdfContent.style.display = 'block';
-  homeContent.style.display = 'none';
+  pdfContent.style.display='block';
+  homeContent.style.display='none';
+  pdfViewer.style.display='block';
   pdfViewer.src = pdfLink;
 
-  // show fullscreen button in nav
   fullscreenBtnNav.style.display = 'inline-block';
-  // close sidenav on mobile after selection
-  if(window.innerWidth <= 900) closeNav();
+
+  if(isIOS){
+    openPdfBtn.href = pdfLink;
+    openPdfBtn.style.display='inline-block';
+  } else openPdfBtn.style.display='none';
+
+  if(window.innerWidth<=900) closeNav();
 }
 
-function goHome(selectedDiv){
-  document.querySelectorAll('.sidenav-link').forEach(n => n.classList.remove('active'));
-  if(selectedDiv) selectedDiv.classList.add('active');
-
-  pdfContent.style.display = 'none';
-  homeContent.style.display = 'flex';
-  pdfViewer.src = '';
-  fullscreenBtnNav.style.display = 'none';
+function goHome(link){
+  document.querySelectorAll('.sidenav-link').forEach(n=>n.classList.remove('active'));
+  if(link) link.classList.add('active');
+  pdfContent.style.display='none';
+  homeContent.style.display='flex';
+  openPdfBtn.style.display='none';
+  fullscreenBtnNav.style.display='none';
 }
 
-/* Fullscreen for iframe */
 function toggleFullscreen(){
-  const el = pdfViewer;
-  if(!el) return;
-  if (el.requestFullscreen) el.requestFullscreen();
-  else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
-  else if (el.msRequestFullscreen) el.msRequestFullscreen();
+  if(pdfContent.requestFullscreen) pdfContent.requestFullscreen();
+  else if(pdfContent.webkitRequestFullscreen) pdfContent.webkitRequestFullscreen();
+  else if(pdfContent.msRequestFullscreen) pdfContent.msRequestFullscreen();
 }
 
-/* Contact dropdown toggle */
-function toggleContactDropdown(){
-  const c = document.getElementById('contactDropdown');
-  if(!c) return;
-  c.style.maxHeight = c.style.maxHeight === '120px' ? '0' : '120px';
-}
-
-/* -------------------------
-   THEME SWITCHER
-   ------------------------- */
-
-/* open/close menu */
 function toggleThemeMenu(){
-  const shown = themeMenu.classList.contains('show');
-  if(shown){
-    themeMenu.classList.remove('show');
-    themeBtn.setAttribute('aria-expanded','false');
-  } else {
-    themeMenu.classList.add('show');
-    themeBtn.setAttribute('aria-expanded','true');
-  }
+  const themeMenu = document.getElementById('themeMenu');
+  const themeBtn = document.getElementById('themeBtn');
+  themeMenu.classList.toggle('show');
 }
 
-/* apply theme */
 function setTheme(mode){
-  // remove any previous theme class from body
-  document.body.classList.remove('theme-dark','theme-colorful','theme-light');
-
-  if(mode === 'dark'){
-    document.body.classList.add('theme-dark');
-    currentSwatch.style.background = '#242526';
-  } else if(mode === 'colorful'){
-    document.body.classList.add('theme-colorful');
-    currentSwatch.style.background = 'linear-gradient(90deg,#87c6ff,#7bd3d6)';
-  } else {
-    // light (default) - explicit class optional
-    document.body.classList.add('theme-light');
-    currentSwatch.style.background = getComputedStyle(document.documentElement).getPropertyValue('--accent') || '#1877f2';
-  }
-
-  // save selection
-  localStorage.setItem('snu_theme', mode);
-
-  // close theme menu
-  themeMenu.classList.remove('show');
-  themeBtn.setAttribute('aria-expanded','false');
+  const currentSwatch = document.getElementById('currentSwatch');
+  if(mode==='dark'){document.body.classList.remove('theme-colorful');document.body.classList.add('theme-dark');currentSwatch.style.background='#1877f2'}
+  else if(mode==='colorful'){document.body.classList.remove('theme-dark');document.body.classList.add('theme-colorful');currentSwatch.style.background='linear-gradient(90deg,#87c6ff,#7bd3d6)'}
+  else{document.body.classList.remove('theme-dark','theme-colorful');currentSwatch.style.background='#1877f2'}
+  document.getElementById('themeMenu').classList.remove('show');
 }
 
-/* load saved theme on init */
-(function initTheme(){
-  const saved = localStorage.getItem('snu_theme') || 'light';
-  setTheme(saved);
-})();
-
-/* close theme menu if clicked outside */
-window.addEventListener('click', (e) => {
-  if(!themeMenu.contains(e.target) && !themeBtn.contains(e.target)){
-    themeMenu.classList.remove('show');
-    themeBtn.setAttribute('aria-expanded','false');
-  }
-});
-
-/* keyboard accessibility for menu close with Escape */
-window.addEventListener('keydown', (e) => {
-  if(e.key === 'Escape'){
-    themeMenu.classList.remove('show');
-    closeNav();
-  }
-});
-
-/* -------------------------
-   Page init: show home by default
-   ------------------------- */
-goHome(); // show home initially
-
-/* -------------------------
-   Extra: handle resize - if pdf open keep fullscreen button, adjust overlay behavior
-   ------------------------- */
-window.addEventListener('resize', () => {
-  // nothing complex for now; keep behavior simple
-});
-
-/* -------------------------
-   Small enhancement: hide "Open in new tab" behavior on mobile by forcing PDF.js
-   If you later integrate pdf.js viewer, point iframe 'src' to viewer page which renders pdf inside
-   ------------------------- */
+function toggleContactDropdown(elem){
+  const dropdown = document.getElementById('contactDropdown');
+  if(dropdown.style.maxHeight && dropdown.style.maxHeight!=='0px') dropdown.style.maxHeight='0';
+  else dropdown.style.maxHeight=dropdown.scrollHeight+'px';
+}
 </script>
+
 </body>
+</html>
