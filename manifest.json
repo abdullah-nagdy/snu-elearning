@@ -1,10 +1,9 @@
 {
-  "name": "SNU E-Learning",
-  "short_name": "SNU-Elearning",
-  "description": "E-Learning Platform for Suez National University",
-  "start_url": "index.html",
+  "name": "Suez National University E-Learning",
+  "short_name": "SNU eLearning",
+  "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#f5f5f5",
+  "background_color": "#ffffff",
   "theme_color": "#1877f2",
   "icons": [
     {
@@ -19,3 +18,4 @@
     }
   ]
 }
+
