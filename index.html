@@ -156,6 +156,11 @@ a{color:inherit;text-decoration:none}
   overflow: hidden;
   transition: max-height 0.3s ease;
 }
+#offlineProgress {
+  transition: color 0.3s;
+  white-space: nowrap;
+}
+
 .contact-dropdown a{
   display:flex;
   align-items:center;
@@ -259,6 +264,9 @@ a{color:inherit;text-decoration:none}
           <div class="desc">Default, bright and clean</div>
         </div>
       </div>
+      <div id="offlineProgress" style="margin-left:10px; font-size:13px; color:var(--muted-text)">
+  تحميل أوفلاين: 0%
+</div>
       <div class="theme-option" tabindex="0" onclick="setTheme('dark')" onkeydown="if(event.key==='Enter')setTheme('dark')">
         <div class="theme-swatch" style="background:#242526;border:1px solid rgba(255,255,255,0.06)"></div>
         <div>
@@ -326,15 +334,27 @@ function closeNav(){sidenav.style.width='0';overlay.style.display='none'}
 function showPDF(pdfLink, selectedDiv){
   document.querySelectorAll('.sidenav-link').forEach(n=>n.classList.remove('active'));
   if(selectedDiv) selectedDiv.classList.add('active');
+
   pdfContent.style.display='block';
   homeContent.style.display='none';
-  pdfViewer.style.display='block';
-  pdfViewer.src = pdfLink;
+
   fullscreenBtnNav.style.display = 'inline-block';
-  if(isIOS){ openPdfBtn.href = pdfLink; openPdfBtn.style.display='inline-block'; }
-  else openPdfBtn.style.display='none';
+
+  if(isIOS){
+    // على iOS، ما نعرضش iframe مباشرة، استخدم زر Open PDF
+    pdfViewer.style.display='none';
+    openPdfBtn.href = pdfLink;
+    openPdfBtn.style.display='inline-block';
+  } else {
+    // على باقي الأجهزة
+    pdfViewer.src = pdfLink;
+    pdfViewer.style.display='block';
+    openPdfBtn.style.display='none';
+  }
+
   if(window.innerWidth<=900) closeNav();
 }
+
 function goHome(link){
   document.querySelectorAll('.sidenav-link').forEach(n=>n.classList.remove('active'));
   if(link) link.classList.add('active');
@@ -361,6 +381,34 @@ function toggleContactDropdown(elem){
   if(dropdown.style.maxHeight && dropdown.style.maxHeight!=='0px') dropdown.style.maxHeight='0';
   else dropdown.style.maxHeight=dropdown.scrollHeight+'px';
 }
+navigator.serviceWorker.addEventListener('message', event => {
+  if(event.data.type === 'PROGRESS'){
+    document.getElementById('offlineProgress').innerText = `تحميل أوفلاين: ${event.data.percent}%`;
+  }
+});
+// عنصر النافبار لعرض نسبة التحميل
+const cacheProgress = document.createElement('div');
+cacheProgress.id = 'cacheProgress';
+cacheProgress.style = 'position:fixed;top:70px;left:0;width:100%;height:4px;background:#ccc;';
+document.body.appendChild(cacheProgress);
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').then(reg => {
+    console.log('SW registered');
+  });
+
+  navigator.serviceWorker.addEventListener('message', event => {
+    if (event.data.type === 'CACHE_PROGRESS') {
+      const progress = event.data.progress;
+      cacheProgress.style.width = progress + '%';
+      cacheProgress.style.background = 'linear-gradient(90deg, #1877f2 ' + progress + '%, #ccc ' + (100-progress) + '%)';
+      if (progress === 100) {
+        setTimeout(() => cacheProgress.remove(), 1000);
+      }
+    }
+  });
+}
+
 </script>
 
 </body>
